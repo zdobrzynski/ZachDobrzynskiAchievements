@@ -1,0 +1,98 @@
+create schema zach;
+
+create table Genre
+(
+	Genre varchar(50)
+		constraint Genre_pk
+			primary key
+);
+
+create table Developer
+(
+	Studio varchar(50)
+		constraint Developer_pk
+			primary key
+);
+
+create table Game
+(
+	GameId int
+		constraint Game_pk
+			primary key generated always as identity (start with 1, increment by 1),
+	Title varchar(255) not null,
+	Genre varchar(50)
+		constraint Game_GENRE_GENRE_fk
+			references GENRE,
+	ReleaseDate date,
+	Description varchar(1000),
+	Developer varchar(50)
+		constraint Game_DEVELOPER_STUDIO_fk
+			references DEVELOPER
+);
+
+create table Achievement
+(
+	AchievementId int
+		constraint Achievement_pk
+			primary key generated always as identity (start with 1, increment by 1),
+	Name varchar(255) not null,
+	Gamerscore int not null,
+	Description varchar(1000),
+	Secret boolean not null,
+	GameId int
+		constraint Achievement_Game_GameId_fk
+			references Game (GameId)
+);
+
+INSERT INTO DEVELOPER (STUDIO) VALUES ('StudioMDHR');
+INSERT INTO DEVELOPER (STUDIO) VALUES ('SoMa Play');
+INSERT INTO DEVELOPER (STUDIO) VALUES ('Other Ocean');
+
+INSERT INTO Genre (Genre) VALUES ('Platforming');
+INSERT INTO Genre (Genre) VALUES ('Shooter');
+INSERT INTO Genre (Genre) VALUES ('Fighting');
+INSERT INTO Genre (Genre) VALUES ('Beat Em Up');
+INSERT INTO Genre (Genre) VALUES ('Stealth');
+INSERT INTO Genre (Genre) VALUES ('Survival');
+INSERT INTO Genre (Genre) VALUES ('Battle Royale');
+INSERT INTO Genre (Genre) VALUES ('Rhythm');
+INSERT INTO Genre (Genre) VALUES ('Horror');
+INSERT INTO Genre (Genre) VALUES ('Metroidvania');
+INSERT INTO Genre (Genre) VALUES ('Text Adventure');
+INSERT INTO Genre (Genre) VALUES ('Visual Novel');
+INSERT INTO Genre (Genre) VALUES ('Interactive Movie');
+INSERT INTO Genre (Genre) VALUES ('RPG');
+INSERT INTO Genre (Genre) VALUES ('Action');
+INSERT INTO Genre (Genre) VALUES ('MMO');
+INSERT INTO Genre (Genre) VALUES ('Roguelike');
+INSERT INTO Genre (Genre) VALUES ('Tactical');
+INSERT INTO Genre (Genre) VALUES ('Sandbox');
+INSERT INTO Genre (Genre) VALUES ('First Person');
+INSERT INTO Genre (Genre) VALUES ('Simulation');
+INSERT INTO Genre (Genre) VALUES ('Strategy');
+INSERT INTO Genre (Genre) VALUES ('Real Time');
+INSERT INTO Genre (Genre) VALUES ('Turn Based');
+INSERT INTO Genre (Genre) VALUES ('Tower Defense');
+INSERT INTO Genre (Genre) VALUES ('Sports');
+INSERT INTO Genre (Genre) VALUES ('Racing');
+INSERT INTO Genre (Genre) VALUES ('Casual');
+INSERT INTO Genre (Genre) VALUES ('Board Game');
+INSERT INTO Genre (Genre) VALUES ('Card Game');
+INSERT INTO Genre (Genre) VALUES ('Party Game');
+
+INSERT INTO GAME (TITLE, RELEASEDATE, DEVELOPER) values ('Cuphead', '09/29/2017', 'StudioMDHR');
+INSERT INTO GAME (TITLE, RELEASEDATE, DEVELOPER) values ('Tetris Ultimate', '11/06/2014', 'SoMa Play');
+INSERT INTO GAME (TITLE, RELEASEDATE, DEVELOPER) values ('#IDARB', '02/01/2015', 'Other Ocean');
+
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Boom Goes the Dynamite', 100, 'Score a fifteen point shot', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Alley Oop!', 100, 'Get an Alley Oop', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Deep Thought', 100, 'Win a game with the final score of 42', true, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Dizzy Dealer', 100, 'Stun online opponents 25 or more times', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Team Spirit', 125, 'Create 10 or more customized teams, each with 8+ characters, a custom logo, and a custom song', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Just Like Having a Baby', 75, 'Create 20 or more characters in the character creator', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Identity Theft', 75, 'Import 10 or more characters via Trading Post or QR code into the game', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Sharing is Caring', 75, 'Import 10 or more songs via Trading Post or QR code into the game', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Represent', 75, 'Create 20 or more logos in the Logo Creator', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Corporate Art Collector', 75, 'Import 10 or more logos via Trading Post or QR code into the game', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('A Regular Mozart', 75, 'Create 20 or more songs in the song creator', false, 3);
+INSERT INTO ACHIEVEMENT (NAME, GAMERSCORE, DESCRIPTION, SECRET, GAMEID) VALUES ('Over "The Air" Achiever', 25, 'Summon the Achievement Bot', false, 3);
